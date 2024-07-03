@@ -72,8 +72,16 @@ class Trainer:
             config = wandb.config
             for k, v in sorted(vars(opt).items()):
                 setattr(config, k, v)
-
         start_epoch = opt.epoch_base
+        if opt.resume_epoch != 0:
+            for i, optimizer in enumerate(model.optimizers):
+                optimizer.load_state_dict(f'C:\Users\qubit\Documents\OMGD\logs\unet_pix2pix\lit8\distill_S24\checkpoints\{opt.resume_epoch}_optim-{i}.pth')
+            model.netG_teacher_w.load_state_dict(f'C:\Users\qubit\Documents\OMGD\logs\unet_pix2pix\lit8\distill_S24\checkpoints\{opt.resume_epoch}_net_G_teacher_d.pth')
+            model.netG_teacher_d.load_state_dict(f'C:\Users\qubit\Documents\OMGD\logs\unet_pix2pix\lit8\distill_S24\checkpoints\{opt.resume_epoch}_net_G_teacher_d.pth')
+            model.netD_teacher.load_state_dict(f'C:\Users\qubit\Documents\OMGD\logs\unet_pix2pix\lit8\distill_S24\checkpoints\{opt.resume_epoch}_net_D_teacher.pth')
+            model.netG_student.load_state_dict(f'C:\Users\qubit\Documents\OMGD\logs\unet_pix2pix\lit8\distill_S24\checkpoints\{opt.resume_epoch}_net_G_student.pth')
+            start_epoch = opt.resume_epoch
+        
         end_epoch = opt.epoch_base + opt.nepochs + opt.nepochs_decay - 1
         total_iter = opt.iter_base
         epoch_tqdm = trange(start_epoch, end_epoch + 1, desc='Epoch      ', position=0, leave=False)

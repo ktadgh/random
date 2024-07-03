@@ -63,6 +63,9 @@ class DistillOptions(BaseOptions):
         parser.add_argument('--eval_batch_size', type=int, default=1, help='the evaluation batch size')
         parser.add_argument('--real_stat_path', type=str,
                             help='the path to load the ground-truth images information to compute FID.')
+        parser.add_argument('--resume_repo', type=int,
+                            help='to resume from')
+
         return parser
 
     def gather_options(self):
