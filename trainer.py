@@ -73,7 +73,7 @@ class Trainer:
             for k, v in sorted(vars(opt).items()):
                 setattr(config, k, v)
         start_epoch = opt.epoch_base
-        if opt.resume_epoch != 0:
+        if int(opt.resume_epoch) != 0:
             for i, optimizer in enumerate(model.optimizers):
                 optimizer.load_state_dict(torch.load('C:\\Users\\qubit\\Documents\\OMGD\\logs\\unet_pix2pix\\lit8\\distill_S24\\checkpoints\\{}_optim-{}.pth'.format(opt.resume_epoch, i)))
             model.netG_teacher_w.load_state_dict(torch.load('C:\\Users\\qubit\\Documents\\OMGD\\logs\\unet_pix2pix\\lit8\\distill_S24\\checkpoints\\{}_net_G_teacher_d.pth'.format(opt.resume_epoch)))
