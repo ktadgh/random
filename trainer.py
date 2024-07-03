@@ -75,8 +75,8 @@ class Trainer:
         start_epoch = opt.epoch_base
         if opt.resume_epoch != 0:
             for i, optimizer in enumerate(model.optimizers):
-                optimizer.load_state_dict(torch.load(f'C:\\Users\\qubit\\Documents\\OMGD\\logs\\unet_pix2pix\\lit8\\distill_S24\\checkpoints\\{opt.resume_epoch}_optim-{i}.pth'))
-            model.netG_teacher_w.load_state_dict(torch.load(f'C:\\Users\\qubit\\Documents\\OMGD\\logs\\unet_pix2pix\\lit8\\distill_S24\\checkpoints\\{opt.resume_epoch}_net_G_teacher_d.pth'))
+                optimizer.load_state_dict(torch.load('C:\\Users\\qubit\\Documents\\OMGD\\logs\\unet_pix2pix\\lit8\\distill_S24\\checkpoints\\{}_optim-{}.pth'.format(opt.resume_epoch, i)))
+            model.netG_teacher_w.load_state_dict(torch.load('C:\\Users\\qubit\\Documents\\OMGD\\logs\\unet_pix2pix\\lit8\\distill_S24\\checkpoints\\{}_net_G_teacher_d.pth'.format(opt.resume_epoch)))
             model.netG_teacher_d.load_state_dict(torch.load(f'C:\\Users\\qubit\\Documents\\OMGD\\logs\\unet_pix2pix\\lit8\\distill_S24\\checkpoints\\{opt.resume_epoch}_net_G_teacher_d.pth'))
             model.netD_teacher.load_state_dict(torch.load(f'C:\\Users\\qubit\\Documents\\OMGD\\logs\\unet_pix2pix\\lit8\\distill_S24\\checkpoints\\{opt.resume_epoch}_net_D_teacher.pth'))
             model.netG_student.load_state_dict(torch.load(f'C:\\Users\\qubit\\Documents\\OMGD\\logs\\unet_pix2pix\\lit8\\distill_S24\\checkpoints\\{opt.resume_epoch}_net_G_student.pth'))
